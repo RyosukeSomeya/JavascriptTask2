@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript課題②</title>
+    <style>
+        p {
+            line-height: 0.7;
+        }
+        span {
+            display: inline-block;
+            width: 90px;
+        }
+        input[type="text"] {
+            width: 160px;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FizzBuzz問題</h1>
+    <form name='fizzBuzzForm'>
+        <p><span>FizzNum:</span><input type="text" name="fizzNum" id="fizzNum" placeholder="整数値を入力してください"></p>
+        <p><span>BuzzNum:</span><input type="text" name="buzzNum" id="buzzNum" placeholder="整数値を入力してください"></p>
+        <p></p><input type="button" id="execBtn" value="実行"></p>
+    </form>
+    <h2>【出力】</h2>
+    <div id="result">
+
+    </div>
+    <script>
+        const resultArea = document.getElementById('result');
+        const btn = document.getElementById('execBtn');
+
+        function fizzBuzz(fizzNum, buzzNum) {
+            if (fizzNum === '' || buzzNum === '') {
+                const elem = document.createElement('p');
+                elem.innerText = '整数値を入力してください。';
+                resultArea.appendChild(elem);
+                return;
+            } else {
+                fizzNum = Number(fizzNum);
+                buzzNum = Number(buzzNum);
+            }
+
+            if (Number.isInteger(fizzNum) && Number.isInteger(buzzNum)) {
+                for(let i = 1; i < 100; i++) {
+                if (i % fizzNum === 0 && i % buzzNum === 0 ) {
+                    const elem = document.createElement('p');
+                    elem.innerText = 'FizzBuzz ' + i;
+                    resultArea.appendChild(elem);
+                } else if (i % fizzNum === 0) {
+                    const elem = document.createElement('p');
+                    elem.innerText = 'Fizz ' + i;
+                    resultArea.appendChild(elem);
+                } else if (i % buzzNum === 0) {
+                    const elem = document.createElement('p');
+                    elem.innerText = 'Buzz ' + i;
+                    resultArea.appendChild(elem);
+                }
+            }
+            } else {
+                const elem = document.createElement('p');
+                elem.innerText = '整数値を入力してください。';
+                resultArea.appendChild(elem);
+            }
+        }
+
+        btn.addEventListener('click', () => {
+            resultArea.innerHTML = '';
+            const fizzNum = document.getElementById('fizzNum').value;
+            const buzzNum = document.getElementById('buzzNum').value;
+            fizzBuzz(fizzNum, buzzNum);
+        });
+    </script>
+</body>
+</html>
